@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Reclect</string>
+    <string name="button">Log In</string>
+    <string name="button2">Create an account</string>
+    <string name="about_us">About Us</string>
+    <string name="support">Support</string>
+    <string name="title_activity_record">RecordActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
