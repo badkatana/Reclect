@@ -82,6 +82,7 @@ public class RecordFragment extends Fragment {
     private void CheckPermissions() {
         boolean recAudio = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
         boolean writeMemory = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+
     }
 
     private void startRecord() {
