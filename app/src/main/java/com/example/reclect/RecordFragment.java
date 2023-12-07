@@ -1,5 +1,6 @@
 package com.example.reclect;
 
+import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,8 +19,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.Permission;
+import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -44,6 +49,10 @@ public class RecordFragment extends Fragment {
     }
 
     ImageButton mainButton;
+    int seconds;
+    int RECORD_TIME_LIMIT_IN_SECONDS = 60000 * 120; // 2 hours
+    boolean isRecording = false;
+    MediaRecorder mediaRecorder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,16 +74,53 @@ public class RecordFragment extends Fragment {
         boolean writeMemory = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
+    private String getRecordingFilePath() {
+        ContextWrapper contextWrapper = new ContextWrapper(getActivity().getApplicationContext());
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString();
+        Log.e("{0}", path);
+        String id = UUID.randomUUID().toString();
+        File newFile = new File(path, id + ".mp3");
+        Log.e("", newFile.getPath());
+        return newFile.getPath();
+    }
+
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     private void recordingProcess() {
         if (((RecordActivity)getActivity()).checkRecordPermission()) {
-            executorService.execute(new Runnable() {
-                @Override
-                public void run() {
-                    MediaRecorder mediaRecorder = new MediaRecorder();
-                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                }
-            });
+            if (!isRecording) {
+                isRecording = true;
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        mediaRecorder = new MediaRecorder();
+                        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                        mediaRecorder.setOutputFile(getRecordingFilePath());
+                        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                        mediaRecorder.setMaxDuration(RECORD_TIME_LIMIT_IN_SECONDS);
+                        Log.e("Record", "Recording started");
+                        try {
+                            mediaRecorder.prepare();
+                        } catch(Exception e) {
+                            e.printStackTrace();
+                        }
+                        mediaRecorder.start();
+                    }
+                });
+            } else
+            {
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        mediaRecorder.stop();
+                        mediaRecorder.release(); //
+                        mediaRecorder = null;
+                        isRecording = false;
+                        Log.e("Record", "Recording ended");
+                    }
+                });
+            }
+
         }
     }
 }

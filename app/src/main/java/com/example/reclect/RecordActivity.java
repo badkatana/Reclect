@@ -16,7 +16,7 @@ import com.example.reclect.databinding.ActivityRecordBinding;
 
 public class RecordActivity extends AppCompatActivity {
     ActivityRecordBinding binding;
-    private static final int REQUEST_AUDIO = 101;
+    public static final int REQUEST_AUDIO = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +55,13 @@ public class RecordActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void AskRecordPermission() {
+    public void AskRecordPermission() {
         ActivityCompat.requestPermissions(RecordActivity.this,
                 new String[] {Manifest.permission.RECORD_AUDIO},
                 REQUEST_AUDIO);
     }
 
-    private boolean checkRecordPermission(){
+    public boolean checkRecordPermission(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED){
             AskRecordPermission();
             return false;
