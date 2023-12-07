@@ -1,5 +1,6 @@
 package com.example.reclect;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -58,7 +59,6 @@ public class RecordActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(RecordActivity.this,
                 new String[] {Manifest.permission.RECORD_AUDIO},
                 REQUEST_AUDIO);
-
     }
 
     private boolean checkRecordPermission(){
@@ -69,4 +69,8 @@ public class RecordActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 }

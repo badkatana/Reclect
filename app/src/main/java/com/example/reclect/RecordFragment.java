@@ -1,6 +1,8 @@
 package com.example.reclect;
 
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 
@@ -14,9 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.security.Permission;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class RecordFragment extends Fragment {
@@ -49,7 +54,7 @@ public class RecordFragment extends Fragment {
         mainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startRecord();
+                recordingProcess();
             }
         });
         return view;
@@ -60,28 +65,16 @@ public class RecordFragment extends Fragment {
         boolean writeMemory = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void startRecord() {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)
-        {
-            // поменять цвет кнопки
-            String mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-            String name = "/example.3gp"; //change
-
-            MediaRecorder mRecord = new MediaRecorder();
-            mRecord.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mRecord.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-            mRecord.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            mRecord.setOutputFile(name);
-            try {
-                mRecord.prepare();
-            } catch (IOException e) {
-                Log.e("TAG", "prepare() failed");
-            }
-            // start method will start
-            // the audio recording.
-            mRecord.start();
-        } else {
-            Log.d("Permission", "Not Granted");
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private void recordingProcess() {
+        if (((RecordActivity)getActivity()).checkRecordPermission()) {
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    MediaRecorder mediaRecorder = new MediaRecorder();
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                }
+            });
         }
     }
 }
