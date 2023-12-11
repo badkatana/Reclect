@@ -10,10 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnLogIn;
     Dialog login;
+    EditText editEmail, editPassword;
     Button btnDialog_cancel, getBtnDialog_login;
 
     @Override
@@ -37,12 +40,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // confirm the login in account
-                Intent recordAct;
-                recordAct = new Intent(MainActivity.this, RecordActivity.class);
-                startActivity(recordAct);
+                AuthUser();
+               Intent recordAct;
+               recordAct = new Intent(MainActivity.this, RecordActivity.class);                startActivity(recordAct);
             }
         });
         login.show();
+    }
+
+    private void AuthUser() {
+        editEmail = findViewById(R.id.editTextText);
+        editPassword = findViewById(R.id.editTextTextPassword);
+        if (editEmail == null) {
+            Toast.makeText(this, "sds", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

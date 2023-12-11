@@ -4,6 +4,7 @@ import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 
@@ -53,6 +54,7 @@ public class RecordFragment extends Fragment {
     int RECORD_TIME_LIMIT_IN_SECONDS = 60000 * 120; // 2 hours
     boolean isRecording = false;
     MediaRecorder mediaRecorder;
+    MediaPlayer mediaPlayer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,6 +86,7 @@ public class RecordFragment extends Fragment {
         return newFile.getPath();
     }
 
+    public String pat;
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     private void recordingProcess() {
         if (((RecordActivity)getActivity()).checkRecordPermission()) {
@@ -95,7 +98,8 @@ public class RecordFragment extends Fragment {
                         mediaRecorder = new MediaRecorder();
                         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                        mediaRecorder.setOutputFile(getRecordingFilePath());
+                        pat = getRecordingFilePath();
+                        mediaRecorder.setOutputFile(pat);
                         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
                         mediaRecorder.setMaxDuration(RECORD_TIME_LIMIT_IN_SECONDS);
                         Log.e("Record", "Recording started");
@@ -113,7 +117,7 @@ public class RecordFragment extends Fragment {
                     @Override
                     public void run() {
                         mediaRecorder.stop();
-                        mediaRecorder.release(); //
+                        mediaRecorder.release();//
                         mediaRecorder = null;
                         isRecording = false;
                         Log.e("Record", "Recording ended");
