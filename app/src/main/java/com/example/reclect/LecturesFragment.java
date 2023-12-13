@@ -5,19 +5,28 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import com.example.reclect.databinding.FragmentLecturesBinding;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import Data.ConspectAdapter;
+import Data.DataBaseHandler;
 import Model.Conspect;
 
 public class LecturesFragment extends Fragment {
 
     FragmentLecturesBinding binding;
+    FirebaseStorage storage;
+    StorageReference storageRef;
     public LecturesFragment() {
         // Required empty public constructor
     }
@@ -45,11 +54,16 @@ public class LecturesFragment extends Fragment {
     }
 
     private ArrayList<Conspect> getData(){
-        ArrayList<Conspect> conspects = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Conspect conspect = new Conspect(i, "ConSpectus");
-            conspects.add(conspect);
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        DataBaseHandler dataBaseHandler = new DataBaseHandler(getContext());;
+        StorageReference fileRef = storageRef.child("starting files/startingFile.pdf");
+        File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "First Step.pdf");
+        if (!localFile.exists()) {
+            fileRef.getFile(localFile);
+            Conspect conspect = new Conspect(0, localFile.getName());
+            dataBaseHandler.AddConspect(conspect);
         }
-        return conspects;
+        return dataBaseHandler.getAllConspects();
     }
 }
