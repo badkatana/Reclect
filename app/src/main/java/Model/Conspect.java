@@ -1,13 +1,9 @@
 package Model;
 
 public class Conspect {
-
     private int id;
     private String ConspectName;
 
-    public Conspect(){
-
-    }
     public Conspect(int id, String conspectName) {
         this.id = id;
         ConspectName = conspectName;

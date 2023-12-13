@@ -39,11 +39,8 @@ public class RecordActivity extends AppCompatActivity {
             return true;
         });
 
-        if (checkRecordPermission())
+        if (!checkRecordPermission())
         {
-
-        }
-        else {
             AskRecordPermission();
         }
     }

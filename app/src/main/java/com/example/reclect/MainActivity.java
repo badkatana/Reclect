@@ -2,26 +2,21 @@ package com.example.reclect;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnLogIn, btnCreate;
     FirebaseAuth mAuth;
     EditText editEmail, editPassword;
 
@@ -30,13 +25,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-
-        btnLogIn = findViewById(R.id.button2);
-        btnCreate = findViewById(R.id.buttonCreate);
+        TextView tx = findViewById(R.id.textView4);
+        tx.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, RecordActivity.class);
+            MainActivity.this.startActivity(intent);
+                }
+        );
+        Button btnLogIn = findViewById(R.id.button2);
+        Button btnCreate = findViewById(R.id.buttonCreate);
 
         btnLogIn.setOnClickListener(view -> LoginUser());
         btnCreate.setOnClickListener(view -> RegisterUser());
-
     }
 
     private void RegisterUser() {
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Enter your email and password", Toast.LENGTH_SHORT).show();
         }
-    };
+    }
 
     private void LoginUser() {
         editEmail = findViewById(R.id.emailEditText);
