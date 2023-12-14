@@ -3,17 +3,16 @@
 
     <item
         android:id="@+id/homerecord"
-        android:title="Home"
-        android:icon="@drawable/img_4" />
+        android:title="@string/home"
+        android:icon="@drawable/home_bona" />
     <item
         android:id="@+id/lectures"
-        android:title ="Lectures"
-        android:icon="@drawable/img_4"
-        ></item>
+        android:title="@string/lectures"
+        android:icon="@drawable/lectures_bona" />
     <item
         android:id="@+id/settings"
-        android:title ="Settings"
-        android:icon="@drawable/img_4"
-        ></item>
+        android:title ="@string/settings"
+        android:icon="@drawable/settings_bona"
+        />
 
 </menu>

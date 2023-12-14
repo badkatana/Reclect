@@ -1,21 +1,30 @@
 package com.example.reclect;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.reclect.databinding.FragmentLecturesBinding;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import Data.ConspectAdapter;
@@ -45,6 +54,8 @@ public class LecturesFragment extends Fragment {
         ConspectAdapter adapt = new ConspectAdapter(getContext(), R.layout.conspect_item, getData());
         ListView listView = binding.getRoot().findViewById(R.id.conspect_view);
         listView.setAdapter(adapt);
+        listView.setClickable(true);
+        listView.setOnItemClickListener((adapterView, view, i, l) -> clickedItem());
         return binding.getRoot();
     }
 
@@ -53,17 +64,20 @@ public class LecturesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private ArrayList<Conspect> getData(){
+    private ArrayList<Conspect> getData() {
         storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-        DataBaseHandler dataBaseHandler = new DataBaseHandler(getContext());;
-        StorageReference fileRef = storageRef.child("starting files/startingFile.pdf");
-        File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "First Step.pdf");
-        if (!localFile.exists()) {
-            fileRef.getFile(localFile);
+        storageRef = storage.getReference("starting files/startingFile.pdf");
+        File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/First Step.pdf");
+        DataBaseHandler dbHandler = new DataBaseHandler(getContext());
+        if (!localFile.exists()){
+            storageRef.getFile(localFile);
             Conspect conspect = new Conspect(0, localFile.getName());
-            dataBaseHandler.AddConspect(conspect);
+            dbHandler.AddConspect(conspect);
         }
-        return dataBaseHandler.getAllConspects();
+        return dbHandler.getAllConspects();
+    }
+
+    private void clickedItem() {
+        ((RecordActivity)getActivity()).setFragments(new ViewConspFragment());
     }
 }

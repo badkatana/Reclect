@@ -17,7 +17,7 @@
         android:background="@drawable/circlebtn"
         android:backgroundTint="#ED8B52"
         android:contentDescription="microphone"
-        app:srcCompat="@drawable/img"
+        app:srcCompat="@drawable/mic"
         tools:layout_editor_absoluteX="88dp"
         tools:layout_editor_absoluteY="206dp" />
 

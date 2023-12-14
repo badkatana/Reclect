@@ -11,12 +11,19 @@ import androidx.fragment.app.FragmentTransaction;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 
 import com.example.reclect.databinding.ActivityRecordBinding;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class RecordActivity extends AppCompatActivity {
     ActivityRecordBinding binding;
     public static final int REQUEST_AUDIO = 101;
+    public static final int EXTERNAL_STORAGE_PERMISSION_CODE = 23;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +45,13 @@ public class RecordActivity extends AppCompatActivity {
             }
             return true;
         });
-
         if (!checkRecordPermission())
         {
             AskRecordPermission();
         }
     }
 
-    private void setFragments (Fragment frgmt) {
+    public void setFragments (Fragment frgmt) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, frgmt);

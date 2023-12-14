@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Reclect</string>
+    <string name="button">Войти</string>
+    <string name="button2">Создать аккаунт</string>
+    <string name="about_us">О нас</string>
+    <string name="support">Поддержка</string>
+    <string name="title_activity_record">RecordActivity</string>
+    <string name="hello_blank_fragment">Привет пустой фрагмент</string>
+    <string name="my_lectures">Мои лекции</string>
+    <string name="search_an_conspect">искать конспект…</string>
+    <string name="record_your_lectures">Запиши свои лекции</string>
+    <string name="email">Электронная почта</string>
+    <string name="password">Пароль</string>
+    <string name="reclect">RecLect</string>
+    <string name="lectures">Конспекты</string>
+    <string name="settings">Настройки</string>
+    <string name="home">Главная</string>
+</resources>
