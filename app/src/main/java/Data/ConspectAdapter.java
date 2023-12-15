@@ -18,6 +18,12 @@ public class ConspectAdapter extends ArrayAdapter<Conspect> {
         super(context, resource, ar);
     }
 
+    @Nullable
+    @Override
+    public Conspect getItem(int position) {
+        return super.getItem(position);
+    }
+
     @Override
     @NonNull
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

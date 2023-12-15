@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".ViewConspFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfShow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Здарова" />
-
+        android:layout_height="match_parent"/>
 </FrameLayout>

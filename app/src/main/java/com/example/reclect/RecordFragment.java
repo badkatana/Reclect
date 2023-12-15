@@ -79,10 +79,8 @@ public class RecordFragment extends Fragment {
     private String getRecordingFilePath() {
         ContextWrapper contextWrapper = new ContextWrapper(getActivity().getApplicationContext());
         String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString();
-        Log.e("{0}", path);
         String id = UUID.randomUUID().toString();
         File newFile = new File(path, id + ".mp3");
-        Log.e("", newFile.getPath());
         return newFile.getPath();
     }
 
@@ -117,14 +115,19 @@ public class RecordFragment extends Fragment {
                     @Override
                     public void run() {
                         mediaRecorder.stop();
-                        mediaRecorder.release();//
+                        mediaRecorder.release();
                         mediaRecorder = null;
                         isRecording = false;
-                        Log.e("Record", "Recording ended");
+                        Log.d("Record", "Recording ended");
+
+                        sendML();
                     }
                 });
             }
-
         }
+    }
+
+    private void sendML(){
+
     }
 }

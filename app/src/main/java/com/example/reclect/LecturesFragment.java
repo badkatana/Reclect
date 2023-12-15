@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reclect.databinding.FragmentLecturesBinding;
@@ -55,7 +56,18 @@ public class LecturesFragment extends Fragment {
         ListView listView = binding.getRoot().findViewById(R.id.conspect_view);
         listView.setAdapter(adapt);
         listView.setClickable(true);
-        listView.setOnItemClickListener((adapterView, view, i, l) -> clickedItem());
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView tV = getView().findViewById(R.id.conspect_item_name);
+                String text = tV.getText().toString();
+                ViewConspFragment viewConspFragment = new ViewConspFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("param1", text);
+                viewConspFragment.setArguments(bundle);
+                ((RecordActivity)getActivity()).setFragments(viewConspFragment, text);
+            }
+        });
         return binding.getRoot();
     }
 
@@ -77,7 +89,4 @@ public class LecturesFragment extends Fragment {
         return dbHandler.getAllConspects();
     }
 
-    private void clickedItem() {
-        ((RecordActivity)getActivity()).setFragments(new ViewConspFragment());
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.reclect;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -30,18 +31,17 @@ public class RecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRecordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        setFragments(new RecordFragment());
+        setFragments(new RecordFragment(), null);
         binding.BottomNavigationView.setBackground(null);
 
         binding.BottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.homerecord) {
-                setFragments(new RecordFragment());
+                setFragments(new RecordFragment(), null);
             } else if (itemId == R.id.lectures) {
-                setFragments(new LecturesFragment());
+                setFragments(new LecturesFragment(), null);
             } else if (itemId == R.id.settings) {
-                setFragments(new SettingsFragment());
+                setFragments(new SettingsFragment(), null);
             }
             return true;
         });
@@ -51,7 +51,7 @@ public class RecordActivity extends AppCompatActivity {
         }
     }
 
-    public void setFragments (Fragment frgmt) {
+    public void setFragments (Fragment frgmt, @Nullable String ConspectName) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, frgmt);
