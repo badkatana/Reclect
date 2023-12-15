@@ -1,13 +1,10 @@
 package com.example.reclect;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Environment;
 import android.util.Log;
@@ -17,16 +14,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.reclect.databinding.FragmentLecturesBinding;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import Data.ConspectAdapter;
 import Data.DataBaseHandler;
@@ -56,17 +49,15 @@ public class LecturesFragment extends Fragment {
         ListView listView = binding.getRoot().findViewById(R.id.conspect_view);
         listView.setAdapter(adapt);
         listView.setClickable(true);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView tV = getView().findViewById(R.id.conspect_item_name);
-                String text = tV.getText().toString();
-                ViewConspFragment viewConspFragment = new ViewConspFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("param1", text);
-                viewConspFragment.setArguments(bundle);
-                ((RecordActivity)getActivity()).setFragments(viewConspFragment, text);
-            }
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            String text = adapt.getItem(i).getConspectName();
+            Log.d("", text);
+
+            ViewConspFragment viewConspFragment = new ViewConspFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("param1", text);
+            viewConspFragment.setArguments(bundle);
+            ((RecordActivity)getActivity()).setFragments(viewConspFragment);
         });
         return binding.getRoot();
     }
@@ -81,12 +72,15 @@ public class LecturesFragment extends Fragment {
         storageRef = storage.getReference("starting files/startingFile.pdf");
         File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/First Step.pdf");
         DataBaseHandler dbHandler = new DataBaseHandler(getContext());
+
         if (!localFile.exists()){
             storageRef.getFile(localFile);
             Conspect conspect = new Conspect(0, localFile.getName());
             dbHandler.AddConspect(conspect);
         }
+
+        Conspect t = new Conspect(1, "Norma.pdf");
+        dbHandler.AddConspect(t);
         return dbHandler.getAllConspects();
     }
-
 }

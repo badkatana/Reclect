@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import Model.Conspect;
 
 public class ConspectAdapter extends ArrayAdapter<Conspect> {
+
+
     public ConspectAdapter(Context context, int resource, ArrayList<Conspect> ar) {
         super(context, resource, ar);
     }

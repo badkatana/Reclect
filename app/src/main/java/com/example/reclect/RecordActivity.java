@@ -24,24 +24,23 @@ import java.io.IOException;
 public class RecordActivity extends AppCompatActivity {
     ActivityRecordBinding binding;
     public static final int REQUEST_AUDIO = 101;
-    public static final int EXTERNAL_STORAGE_PERMISSION_CODE = 23;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRecordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setFragments(new RecordFragment(), null);
+        setFragments(new RecordFragment());
         binding.BottomNavigationView.setBackground(null);
 
         binding.BottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.homerecord) {
-                setFragments(new RecordFragment(), null);
+                setFragments(new RecordFragment());
             } else if (itemId == R.id.lectures) {
-                setFragments(new LecturesFragment(), null);
+                setFragments(new LecturesFragment());
             } else if (itemId == R.id.settings) {
-                setFragments(new SettingsFragment(), null);
+                setFragments(new SettingsFragment());
             }
             return true;
         });
@@ -51,7 +50,7 @@ public class RecordActivity extends AppCompatActivity {
         }
     }
 
-    public void setFragments (Fragment frgmt, @Nullable String ConspectName) {
+    public void setFragments (Fragment frgmt) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, frgmt);

@@ -16,6 +16,9 @@ import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 
 import java.io.File;
 
+import Data.DataBaseHandler;
+import Model.Conspect;
+
 public class ViewConspFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
@@ -40,11 +43,16 @@ public class ViewConspFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         pdfView = getView().findViewById(R.id.pdfShow);
         File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), mParam1);
-        pdfView.fromFile(localFile)
-                .defaultPage(0)
-                .scrollHandle(new DefaultScrollHandle(getContext()))
-                .spacing(10)
-                .load();
+        if (localFile.exists()) {
+            pdfView.fromFile(localFile)
+                    .defaultPage(0)
+                    .scrollHandle(new DefaultScrollHandle(getContext()))
+                    .spacing(10)
+                    .load();
+        } else {
+            DataBaseHandler dbHandler = new DataBaseHandler(getContext());
+            dbHandler.deleteConspect(mParam1);
+        }
     }
 
     @Override

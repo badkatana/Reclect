@@ -72,4 +72,12 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.close();
         return conspects;
     }
+
+    // сделать удаление конспекта, если файл не существует
+    public void deleteConspect(String name) {
+        Conspect conspect = getConspect(name);
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Util.TABLE_NAME, Util.CONSPECT_NAME + "=?", new String[] {conspect.getConspectName()});
+        db.close();
+    }
 }
