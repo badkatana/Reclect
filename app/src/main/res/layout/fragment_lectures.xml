@@ -25,14 +25,15 @@
             android:textSize="50sp"
             />
 
-        <EditText
+        <SearchView
+            android:id="@+id/search_view"
             android:layout_width="309dp"
             android:layout_marginBottom="20dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/white"
-            android:hint="@string/search_an_conspect"
-            android:inputType="text"/>
+            android:queryHint="@string/search_an_conspect"
+            android:inputType="text" />
 
         <ListView
             android:id="@+id/conspect_view"

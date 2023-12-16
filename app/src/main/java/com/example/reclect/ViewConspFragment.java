@@ -43,16 +43,12 @@ public class ViewConspFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         pdfView = getView().findViewById(R.id.pdfShow);
         File localFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), mParam1);
-        if (localFile.exists()) {
             pdfView.fromFile(localFile)
                     .defaultPage(0)
                     .scrollHandle(new DefaultScrollHandle(getContext()))
                     .spacing(10)
                     .load();
-        } else {
-            DataBaseHandler dbHandler = new DataBaseHandler(getContext());
-            dbHandler.deleteConspect(mParam1);
-        }
+
     }
 
     @Override

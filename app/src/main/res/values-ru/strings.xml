@@ -16,4 +16,5 @@
     <string name="lectures">Конспекты</string>
     <string name="settings">Настройки</string>
     <string name="home">Главная</string>
+    <string name="no_such_file">Такого файла не существует</string>
 </resources>

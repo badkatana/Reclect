@@ -5,19 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Filter;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.example.reclect.R;
 import java.util.ArrayList;
+import java.util.List;
+
 import Model.Conspect;
 
 public class ConspectAdapter extends ArrayAdapter<Conspect> {
 
+    ArrayList<Conspect> data;
 
     public ConspectAdapter(Context context, int resource, ArrayList<Conspect> ar) {
         super(context, resource, ar);
+        data = ar;
     }
 
     @Nullable
@@ -25,6 +29,7 @@ public class ConspectAdapter extends ArrayAdapter<Conspect> {
     public Conspect getItem(int position) {
         return super.getItem(position);
     }
+
 
     @Override
     @NonNull
@@ -44,4 +49,5 @@ public class ConspectAdapter extends ArrayAdapter<Conspect> {
 
         return convertView;
     }
+
 }
