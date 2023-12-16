@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Reclect</string>
+    <string name="button">Ввійти</string>
+    <string name="button2">Створити аккаунт</string>
+    <string name="about_us">О нас</string>
+    <string name="support">Підтримка</string>
+    <string name="title_activity_record">RecordActivity</string>
+    <string name="my_lectures">Мої лекції</string>
+    <string name="search_an_conspect">шукати конспект…</string>
+    <string name="record_your_lectures">Запиши свої лекції</string>
+    <string name="email">Електронна пошта</string>
+    <string name="password">Пароль</string>
+    <string name="reclect">RecLect</string>
+    <string name="lectures">Конспекты</string>
+    <string name="settings">Налаштування</string>
+    <string name="home">Головна</string>
+    <string name="no_such_file">Такого файлу не існує</string>
+    <string name="language_version_1">Мова: англійська</string>
+    <string name="language_version_2">Мова: українська</string>
+    <string name="recover_all_the_lectures">Встановити всі конспекти</string>
+    <string name="locale_1">en</string>
+    <string name="locale_2">ru</string>
+</resources>

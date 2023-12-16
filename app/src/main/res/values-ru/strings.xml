@@ -17,4 +17,9 @@
     <string name="settings">Настройки</string>
     <string name="home">Главная</string>
     <string name="no_such_file">Такого файла не существует</string>
+    <string name="language_version_1">Язык: английский</string>
+    <string name="language_version_2">Язык: украинский</string>
+    <string name="recover_all_the_lectures">Восстановить все конспекты</string>
+    <string name="locale_1">en</string>
+    <string name="locale_2">uk</string>
 </resources>

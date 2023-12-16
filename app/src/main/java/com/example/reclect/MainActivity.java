@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
+import Utils.httpRequests;
+
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     EditText editEmail, editPassword;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         tx.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, RecordActivity.class);
             MainActivity.this.startActivity(intent);
+
                 }
         );
         Button btnLogIn = findViewById(R.id.button2);

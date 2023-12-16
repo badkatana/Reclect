@@ -29,6 +29,8 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import Utils.httpRequests;
+
 
 public class RecordFragment extends Fragment {
 
@@ -80,10 +82,11 @@ public class RecordFragment extends Fragment {
         ContextWrapper contextWrapper = new ContextWrapper(getActivity().getApplicationContext());
         String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString();
         String id = UUID.randomUUID().toString();
-        File newFile = new File(path, id + ".mp3");
-        return newFile.getPath();
+        localFile = new File(path, id + ".mp3");
+        return localFile.getPath();
     }
 
+    public File localFile;
     public String pat;
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     private void recordingProcess() {
@@ -120,7 +123,8 @@ public class RecordFragment extends Fragment {
                         isRecording = false;
                         Log.d("Record", "Recording ended");
 
-                        sendML();
+                        httpRequests new_req = new httpRequests();
+                        new_req.POSTRequest(localFile);
                     }
                 });
             }
