@@ -123,15 +123,13 @@ public class RecordFragment extends Fragment {
                         isRecording = false;
                         Log.d("Record", "Recording ended");
 
-                        httpRequests new_req = new httpRequests();
+                        String[] nameFiles = pat.split("\\.");
+                        String nameFile = nameFiles[0];
+                        httpRequests new_req = new httpRequests(nameFile);
                         new_req.POSTRequest(localFile);
                     }
                 });
             }
         }
-    }
-
-    private void sendML(){
-
     }
 }

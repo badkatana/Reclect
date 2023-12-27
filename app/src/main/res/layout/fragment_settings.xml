@@ -1,41 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/dark_background_fragment">
+    android:orientation="vertical"
+    android:background="@color/dark_background_fragment"
+    tools:context=".RecordActivity">
 
         <TextView
-            android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings"
-            android:layout_marginBottom="30dp"
+            android:text="@string/reclect_support"
             android:textColor="@color/white"
             android:textSize="45sp"
-            android:layout_gravity="center"
-            android:textStyle="bold"/>
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold" />
 
         <TextView
+            android:layout_gravity="center"
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="default email"
-            android:padding="10dp"
-            android:background="@color/orange"
+            android:text="@string/please_share_your_opinions_with_us"
+            android:textColor="@color/white"
+            android:textStyle="italic"
             android:layout_marginBottom="10dp"/>
 
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/recover_all_the_lectures"/>
+    <TextView
+        android:id="@+id/emailUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@color/orange"
+        android:padding="10dp"
+        android:text="default-email"
+        android:textColor="#4E342E" />
 
-    </LinearLayout>
-</FrameLayout>
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="291dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:gravity="top|start"
+        android:hint="@string/enter_your_message"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:minLines="6"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send" />
+</LinearLayout>

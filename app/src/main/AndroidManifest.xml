@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:name="android.hardware.microphone"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.microphone" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +20,7 @@
             android:name=".RecordActivity"
             android:exported="false"
             android:label="@string/title_activity_record"
-            android:theme="@style/Theme.Reclect"/>
+            android:theme="@style/Theme.Reclect" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -30,5 +30,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

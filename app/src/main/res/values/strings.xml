@@ -13,7 +13,7 @@
     <string name="password">Password</string>
     <string name="reclect">RecLect</string>
     <string name="lectures">Lectures</string>
-    <string name="settings">Settings</string>
+    <string name="settings">Support</string>
     <string name="home">Home</string>
     <string name="no_such_file">No such file</string>
     <string name="language_version_1">Russian language</string>
@@ -21,4 +21,9 @@
     <string name="recover_all_the_lectures">Recover all the lectures</string>
     <string name="locale_1">ru</string>
     <string name="locale_2">uk</string>
+    <string name="please_share_your_opinions_with_us">Please share your opinions with us</string>
+    <string name="enter_your_message">Enter your message...</string>
+    <string name="reclect_support">RecLect support</string>
+    <string name="send">Send</string>
+    <string name="go_back">Go back</string>
 </resources>

@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,71 +27,73 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        TextView tx = findViewById(R.id.textView4);
-        tx.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, RecordActivity.class);
-            MainActivity.this.startActivity(intent);
-
-                }
-        );
         Button btnLogIn = findViewById(R.id.button2);
         Button btnCreate = findViewById(R.id.buttonCreate);
 
-        btnLogIn.setOnClickListener(view -> LoginUser());
-        btnCreate.setOnClickListener(view -> RegisterUser());
-    }
-
-    private void RegisterUser() {
         editEmail = findViewById(R.id.emailEditText);
         editPassword = findViewById(R.id.passwordEditText);
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
 
-        if (!(email.equals("")) && !(password.equals(""))) {
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-//                        FirebaseUser user = mAuth.getCurrentUser();
-                        Intent intent = new Intent(MainActivity.this, RecordActivity.class);
-                        MainActivity.this.startActivity(intent);
-                    }
-                    else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(MainActivity.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-                    }
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (EmailPassword(email, password)) {
+                    LoginUser(email, password);
                 }
-            });
-        } else {
-            Toast.makeText(this, "Enter your email and password", Toast.LENGTH_SHORT).show();
-        }
+            }
+        });
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (EmailPassword(email, password)) {
+                    RegisterUser(email, password);
+                }
+            }
+        });
     }
 
-    private void LoginUser() {
-        editEmail = findViewById(R.id.emailEditText);
-        editPassword = findViewById(R.id.passwordEditText);
-        String email = editEmail.getText().toString();
-        String password = editPassword.getText().toString();
-
-        if (!(email.equals("")) && !(password.equals(""))) {
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-//                                FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(MainActivity.this, RecordActivity.class);
-                                MainActivity.this.startActivity(intent);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(MainActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        } else {
+    private boolean EmailPassword(String email, String password) {
+        if ((email.equals("")) && !(password.equals(""))) {
             Toast.makeText(this, "Enter your email and password", Toast.LENGTH_SHORT).show();
+            return false;
         }
+        return true;
+    }
+
+    private void callRecordActivity() {
+        Intent intent = new Intent(MainActivity.this, RecordActivity.class);
+        MainActivity.this.startActivity(intent);
+    }
+
+    private void RegisterUser(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    callRecordActivity();
+                } else {
+                    Toast.makeText(MainActivity.this, "Authentication failed. Please try again",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void LoginUser(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            callRecordActivity();
+                        } else {
+                                // If sign in fails, display a message to the user.
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

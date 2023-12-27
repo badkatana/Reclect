@@ -1,25 +1,16 @@
 package com.example.reclect;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
-
 import com.example.reclect.databinding.ActivityRecordBinding;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class RecordActivity extends AppCompatActivity {
     ActivityRecordBinding binding;
@@ -59,8 +50,7 @@ public class RecordActivity extends AppCompatActivity {
 
     public void AskRecordPermission() {
         ActivityCompat.requestPermissions(RecordActivity.this,
-                new String[] {Manifest.permission.RECORD_AUDIO},
-                REQUEST_AUDIO);
+                new String[] {Manifest.permission.RECORD_AUDIO}, REQUEST_AUDIO);
     }
 
     public boolean checkRecordPermission(){

@@ -14,7 +14,7 @@
     <string name="password">Пароль</string>
     <string name="reclect">RecLect</string>
     <string name="lectures">Конспекты</string>
-    <string name="settings">Настройки</string>
+    <string name="settings">Поддержка</string>
     <string name="home">Главная</string>
     <string name="no_such_file">Такого файла не существует</string>
     <string name="language_version_1">Язык: английский</string>
@@ -22,4 +22,9 @@
     <string name="recover_all_the_lectures">Восстановить все конспекты</string>
     <string name="locale_1">en</string>
     <string name="locale_2">uk</string>
+    <string name="please_share_your_opinions_with_us">Please share your opinions with us</string>
+    <string name="enter_your_message">Введите своё сообщение…</string>
+    <string name="reclect_support">RecLect support</string>
+    <string name="send">Send</string>
+    <string name="go_back">Go back</string>
 </resources>
